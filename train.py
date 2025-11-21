@@ -1,0 +1,21 @@
+from sklearn.ensemble import RandomForestClassifier
+import joblib  
+import pandas as pd 
+import os
+
+def train():
+    data=pd.read_csv('data/Iris.csv')
+    
+    X=data.drop(columns=['Id','Species'])
+    Y=data['Species']
+    
+    model=RandomForestClassifier()
+    
+    model.fit(X,Y)
+    
+    os.makedirs('model',exist_ok=True)
+    joblib.dump(model,'model/model.pkl')
+    
+if __name__=="__main__":
+    train()
+    
